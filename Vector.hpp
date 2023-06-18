@@ -277,11 +277,13 @@ void Vector<T>::free() {
 template<typename T>
 void readVectorFromFile(Vector<T>& vec, std::ifstream& in) {
 	if (in.is_open()) {
-		size_t size = 0;
-		in.read((char*)&size, sizeof(size_t));
-		vec.reserve(size);
-		for (size_t i = 0; i < size; i++) {
-			in>> vec[i];
+		size_t capacity = 0;
+		in.read((char*)&capacity, sizeof(size_t));
+		vec.resize(capacity);
+		for (size_t i = 0; i < capacity; i++) {
+			T obj;
+			in >> obj;
+			vec.pushBack(std::move(obj));
 		}
 	}
 }
