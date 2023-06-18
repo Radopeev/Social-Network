@@ -112,10 +112,11 @@ void Comment::readRepliesFromFile(std::ifstream& in) {
 	if (in) {
 		size_t size = 0;
 		in.read((char*)(&size), sizeof(size_t));
-		replies.reserve(size);
+		replies.resize(size);
 		for (int i = 0; i < size; i++) {
-			replies[i] = new Comment;
-			in>>*(replies[i]);
+			SharedPointer<Comment> newComment(new Comment);
+			in>>newComment.operator*();
+			replies.pushBack(std::move(newComment));
 		}
 	}
 }
