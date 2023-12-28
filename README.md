@@ -1,2 +1,2 @@
 # Social-Network
-My project on the subject Object_oriented programming practicum
+My project for completing the course Object-oriented programming practicum in FMI SU.
